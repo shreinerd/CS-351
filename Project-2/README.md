@@ -20,6 +20,8 @@
 |72| 1.91|16.85|28.91| 7.42|
 |80| 1.94|17.21|21.76| 7.31|
 
+![Graph of Speedup Factors by Thread Count](Speedup.png)
+
 ## Amdahl's Law
 
 $$ \mathrm{speed\ up} = \frac{1}{2} $$
