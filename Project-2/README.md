@@ -21,6 +21,7 @@
 |80| 1.94|17.21|21.76| 7.31|
 
 ![Graph of Speedup Factors by Thread Count](Speedup.png)
+![Graph of program runtimes](Runtimes.png)
 
 ## Amdahl's Law
 
