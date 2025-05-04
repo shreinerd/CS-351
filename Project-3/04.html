@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="initShaders.js"></script>
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            uniform float N, t;
+
+            void main() {
+                if (gl_VertexID == 0) {
+                    gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+                    return;
+                }
+
+                float vid = float(gl_VertexID);
+                
+                const float Pi = 3.14159265358979;
+                float angle = vid * 2.0 * Pi / (N - 2.0) + t;
+                float radius = 1.0 - 0.6 * float(gl_VertexID % 2 == 1);
+                vec2 v = radius * vec2(cos(angle), sin(angle));
+                
+                gl_Position = vec4(v, 0.0, 1.0);
+            }
+                
+        </script>
+        
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            out vec4 fColor;
+            
+            void main() {
+                fColor = vec4(1.0, 1.0, 0.0, 1.0);
+            }
+        </script>
+
+        <script>
+            window.onload = () => {
+                var canvas = document.getElementById("webgl");
+                var gl = canvas.getContext("webgl2");
+
+                gl.clearColor(0.1, 0.1, 0.1, 1.0);
+
+                var program = initShaders(gl, "vertex-shader", "fragment-shader");
+                
+                // These are lines that we'll need a bit later.
+                var uN = gl.getUniformLocation(program, "N");
+                var uTime = gl.getUniformLocation(program, "t");
+
+                var t = 0.0;
+
+                var render = () => {
+                    t += 0.01;  // Tick time
+
+                    gl.clear(gl.COLOR_BUFFER_BIT);
+                    gl.useProgram(program);
+
+                    const N = 12; // number of vertices
+
+                    // Other code we'll need later, in combination with the
+                    //   code above marked for later use.
+                    gl.uniform1f(uN, N);
+                    gl.uniform1f(uTime, t);
+
+                    gl.drawArrays(gl.TRIANGLE_FAN, 0, N);
+
+                    requestAnimationFrame(render);
+                };
+
+                render();
+            };
+        </script>
+    </head>
+
+    <body>
+        <canvas id="webgl" width="512" height="512"></canvas>
+    </body>
+</html>
