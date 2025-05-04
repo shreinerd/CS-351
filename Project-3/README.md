@@ -1,3 +1,8 @@
 # GPUs doing Graphics
 
-<iframe src="http://blue.cs.sonoma.edu/~shreiner/p3/" width="1100" height="1100"></iframe>
+Project files:
+
+* [A simple triangle](01.html)
+* [A 10-sided disk](02.html)
+* [A star (is born)!](03.html)
+* [Spinny!](04.html)
